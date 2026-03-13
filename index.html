@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NexaVerse — Shaxsiy Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       1. LOADING SCREEN
+  ═══════════════════════════════════════ -->
+  <section id="loader" class="screen active">
+    <!-- Ambient background orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="loader-center">
+      <!-- SVG neon ring progress bar -->
+      <div class="ring-wrap">
+        <svg class="ring-svg" viewBox="0 0 200 200">
+          <!-- Track -->
+          <circle class="ring-track" cx="100" cy="100" r="82"/>
+          <!-- Progress arc -->
+          <circle class="ring-progress" id="ringProgress" cx="100" cy="100" r="82"/>
+        </svg>
+        <!-- Pulsating core -->
+        <div class="ring-core">
+          <span class="loader-percent" id="loaderPercent">0</span>
+          <span class="loader-pct-label">%</span>
+        </div>
+      </div>
+
+      <p class="loader-tagline">NexaVerse yuklanmoqda<span class="dots"></span></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       2. ONBOARDING / REGISTRATION
+  ═══════════════════════════════════════ -->
+  <section id="onboarding" class="screen">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="glass-card onboard-card">
+      <!-- Step indicator -->
+      <div class="step-bar">
+        <div class="step active" data-step="1"></div>
+        <div class="step" data-step="2"></div>
+        <div class="step" data-step="3"></div>
+      </div>
+
+      <!-- ── Step 1: Ism ── -->
+      <div class="onboard-step active" id="step1">
+        <h2 class="onboard-title">Salom, Yangi Dўst 👋</h2>
+        <p class="onboard-sub">Ismingizni kiriting — biz sizga maxsus tajriba yaratamiz.</p>
+        <div class="input-wrap">
+          <input type="text" id="nameInput" class="neo-input" placeholder="Ismingiz..." maxlength="30" autocomplete="off"/>
+          <div class="input-line"></div>
+        </div>
+        <button class="btn-next" id="step1Next">Davom etish →</button>
+      </div>
+
+      <!-- ── Step 2: Yo'nalishlar ── -->
+      <div class="onboard-step" id="step2">
+        <h2 class="onboard-title">Qiziqishlaringiz 🔥</h2>
+        <p class="onboard-sub">Bir yoki bir nechta tanlang.</p>
+        <div class="interest-grid">
+          <div class="interest-card" data-val="tech">
+            <span class="interest-icon">💻</span>
+            <span class="interest-label">Texnologiya</span>
+          </div>
+          <div class="interest-card" data-val="art">
+            <span class="interest-icon">🎨</span>
+            <span class="interest-label">San'at</span>
+          </div>
+          <div class="interest-card" data-val="biz">
+            <span class="interest-icon">📈</span>
+            <span class="interest-label">Biznes</span>
+          </div>
+          <div class="interest-card" data-val="game">
+            <span class="interest-icon">🎮</span>
+            <span class="interest-label">Gaming</span>
+          </div>
+        </div>
+        <button class="btn-next" id="step2Next">Davom etish →</button>
+      </div>
+
+      <!-- ── Step 3: Maqsad ── -->
+      <div class="onboard-step" id="step3">
+        <h2 class="onboard-title">Maqsadingiz nima? 🎯</h2>
+        <p class="onboard-sub">Bitta tanlang.</p>
+        <div class="goal-list">
+          <button class="goal-btn" data-val="learn">📚 O'rganish</button>
+          <button class="goal-btn" data-val="fun">🎲 O'yin-kulgu</button>
+          <button class="goal-btn" data-val="inspire">✨ Ilhomlanish</button>
+        </div>
+        <button class="btn-next" id="step3Next">Boshlash 🚀</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       3. MAIN DASHBOARD
+  ═══════════════════════════════════════ -->
+  <section id="dashboard" class="screen">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Top nav -->
+    <nav class="dash-nav glass-card">
+      <span class="nav-logo">NexaVerse</span>
+      <span class="nav-welcome" id="navWelcome">Xush kelibsiz!</span>
+      <button class="nav-reset" id="resetBtn" title="Qayta boshlash">↩</button>
+    </nav>
+
+    <!-- Dynamic content area -->
+    <main class="dash-main" id="dashContent">
+      <!-- JS tomonidan to'ldiriladi -->
+    </main>
+
+    <!-- Mini-game modal (Gaming+Fun) -->
+    <div class="modal-overlay hidden" id="gameModal">
+      <div class="glass-card modal-card">
+        <button class="modal-close" id="gameClose">✕</button>
+        <h3 class="modal-title">🎮 Raqam Toping!</h3>
+        <p id="gameMsg" class="game-msg">1–100 orasidagi raqamni toping!</p>
+        <input type="number" id="gameInput" class="neo-input" placeholder="Taxminingiz..." min="1" max="100"/>
+        <button class="btn-next" id="guessBtn">Tekshirish</button>
+        <p id="guessResult" class="guess-result"></p>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
